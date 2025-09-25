@@ -7,15 +7,16 @@ authors = [
 ]
 dependencies = [] # Add your script dependencies here
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">={{ cookiecutter.python_version }}"
 license = { text = "MIT" }
 
-[dependency-groups]
+[project.optional-dependencies]
 dev = [
-    "pytest==8.2.2",
-    "pytest-cov==5.0.0",
-    "ruff==0.4.7",
-    "bandit==1.7.9",
+    "pytest==8.4.2",
+    "pytest-cov==7.0.0",
+    "ruff==0.13.1",
+    "bandit==1.8.6",
+    "mypy==1.11.1",
 ]
 
 [tool.uv]
@@ -24,17 +25,23 @@ dev = [
 
 [tool.ruff]
 line-length = 88
-target-version = "py311"
-# Linter rules to ignore, e.g., if you want to skip docstring checks
-ignore = ["D100", "D101", "D102", "D103", "D104", "D105", "D107"]
+target-version = "py{{ cookiecutter.python_version.replace('.','') }}"
 
 [tool.ruff.lint]
 select = ["E", "F", "B", "I"] # Common rules for errors, flakes, bugs, and imports
+# Linter rules to ignore, e.g., if you want to skip docstring checks
+ignore = ["D100", "D101", "D102", "D103", "D104", "D105", "D107"]
 
 [tool.pytest.ini_options]
 # Tell pytest where to find the source code
-pythonpath = ["."]
+pythonpath = ["./src"]
 addopts = "--cov=src --cov-report=term-missing --cov-fail-under=90"
 
 [tool.bandit]
 exclude = ["tests"]
+
+[tool.mypy]
+python_version = "{{ cookiecutter.python_version }}"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true  # Enforces type hints on all functions

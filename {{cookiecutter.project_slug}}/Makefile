@@ -1,19 +1,29 @@
 .PHONY: install format lint test security
 
+VENV_DIR := .venv
+PYTHON_BIN := $(VENV_DIR)/bin/python
+
 install:
-	uv pip install --no-deps -e .
-	uv pip compile --no-emit-hashes pyproject.toml --output-file uv.lock
+	uv venv
+	uv pip install -e ".[dev]"
+	uv pip compile --output-file uv.lock --extra dev pyproject.toml
 	uv pip sync uv.lock
 
 format:
-	uv run ruff check --fix .
-	uv run ruff format .
+	$(PYTHON_BIN) -m ruff format .
+	$(PYTHON_BIN) -m ruff check --fix .
 
 lint:
-	uv run ruff check .
+	$(PYTHON_BIN) -m ruff check .
 
 test:
-	uv run pytest
+	$(PYTHON_BIN) -m pytest
+
+coverage:
+	open htmlcov/index.html
+
+typecheck:
+	$(PYTHON_BIN) -m mypy .
 
 security:
-	uv run bandit -r .
+	$(PYTHON_BIN) -m bandit -r .

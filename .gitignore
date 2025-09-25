@@ -1,15 +1,59 @@
-# Virtual environments
-.venv/
-# IDE files
-.vscode/
-# Python cache and build artifacts
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.pyc
-dist/
-.pytest_cache/
-.ruff_cache/
-# uv lock file
-uv.lock
+*.pyd
+*.pyo
+*.egg-info/
+.eggs/
 
-# MacOS
+# Distribution / packaging
+dist/
+build/
+*.egg
+*.whl
+
+# Virtual environment
+venv/
+.venv/
+env/
+.env/
+
+# IDEs and Editors
+# VS Code
+.vscode/
+# PyCharm
+.idea/
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+# Vim
+*.swp
+*.swo
+
+# OS-generated files
 .DS_Store
+Thumbs.db
+
+# Test and development
+*.pytest_cache/
+.coverage
+htmlcov/
+.nox/
+
+# Logs
+*.log
+
+# Database
+*.sqlite3
+*.db
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Miscellaneous
+# Pipenv
+Pipfile.lock
+# Poetry
+poetry.lock
+# PDM
+pdm.lock

@@ -1,4 +1,4 @@
-from src.{{cookiecutter.project_slug}}.main import greet
+from {{cookiecutter.project_slug}}.main import greet
 
 def test_greet():
     """Test the greet function."""
