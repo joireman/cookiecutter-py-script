@@ -35,7 +35,7 @@ ignore = ["D100", "D101", "D102", "D103", "D104", "D105", "D107"]
 [tool.pytest.ini_options]
 # Tell pytest where to find the source code
 pythonpath = ["./src"]
-addopts = "--cov=src --cov-report=term-missing --cov-fail-under=90"
+addopts = "--cov=src --cov-report=term-missing --cov-report=html --cov-fail-under=90"
 
 [tool.bandit]
 exclude = ["tests"]
