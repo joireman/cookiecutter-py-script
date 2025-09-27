@@ -4,5 +4,6 @@
   "project_description": "A template for modern Python scripts.",
   "author_name": "Your Name",
   "author_email": "you@example.com",
-  "python_version": "3.12"
+  "python_version": "3.12",
+  "include_mkdocs_docs": ["yes", "no"]
 }
