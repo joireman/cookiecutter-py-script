@@ -1,7 +1,7 @@
 {% if cookiecutter.include_mkdocs_docs.lower() == 'yes' %}
-.PHONY: install format lint test security help typecheck all clean coverage docs
+.PHONY: install format lint test security help typecheck all clean coverage docs dev audit
 {% else %}
-.PHONY: install format lint test security help typecheck all clean coverage
+.PHONY: install format lint test security help typecheck all clean coverage dev audit
 {% endif %}
 
 VENV_DIR := .venv
@@ -9,21 +9,34 @@ PYTHON_BIN := $(VENV_DIR)/bin/python
 
 help:
 	@echo "Available commands:"
-	@echo "  install   - Create virtual env and install dependencies from lockfile"
+	@echo "  all       - Run format, lint, and test"
+	@echo "  audit     - Runs py-audit (must be installed globally)
+	@echo "  clean     - Remove temporary Python files"
+	@echo "  dev       - Create virtual env and install runtime and development dependencies from lockfile"
 	@echo "  coverage  - Open a browser to view coverage HTML report"
+{% if cookiecutter.include_mkdocs_docs.lower() == 'yes' %}
+	@echo "  docs      - Serve documentation locally"
+{% endif %}
 	@echo "  format    - Auto-format code using Ruff"
+	@echo "  install   - Create virtual env and install runtime dependencies from lockfile"
 	@echo "  lint      - Check code for style issues and errors using Ruff"
 	@echo "  security  - Run security checks with Bandit"
 	@echo "  test      - Run tests with pytest and generate coverage report"
 	@echo "  typecheck - Run type checks with mypy"
-	@echo "  all       - Run format, lint, and test"
-	@echo "  clean     - Remove temporary Python files"
 
 install:
+	rm uv.lock
 	uv venv
-	uv pip install -e ".[dev]"
-	uv pip compile --output-file uv.lock --extra dev pyproject.toml
-	uv pip sync uv.lock
+	uv sync 
+
+audit: 
+	pip-audit
+
+dev:
+	rm uv.lock
+	uv venv
+	uv lock 
+	uv sync --extra dev 
 
 format:
 	$(PYTHON_BIN) -m ruff format .
