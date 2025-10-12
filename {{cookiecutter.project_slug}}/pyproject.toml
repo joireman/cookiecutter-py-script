@@ -22,7 +22,7 @@ dev = [
     "mkdocs-material==9.6.20",
     {% endif %}
     {% if cookiecutter.developing_on_windows.lower() == 'yes' %}
-    invoke>=2.2.0,
+    "invoke>=2.2.0",
     {% endif %}
 ]
 

@@ -23,7 +23,6 @@ def test(ctx):
 def lint(ctx):
     ctx.run(".venv/Scripts/python.exe -m ruff check .")
 
-
 @task 
 def docs(ctx):
     ctx.run("open htmlcov/index.html.")
@@ -46,5 +45,5 @@ def format(ctx):
     ctx.run(".venv/Scripts/python.exe -m ruff check --fix .")
 
 @task
-def docs(ctc):
+def docs(ctx):
     ctx.run(".venv/Scripts/python.exe -m mkdocs serve")
