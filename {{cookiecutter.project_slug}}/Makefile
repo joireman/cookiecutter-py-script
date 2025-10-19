@@ -10,7 +10,7 @@ PYTHON_BIN := $(VENV_DIR)/bin/python
 help:
 	@echo "Available commands:"
 	@echo "  all       - Run format, lint, and test"
-	@echo "  audit     - Runs py-audit (must be installed globally)
+	@echo "  audit     - Runs py-audit (must be installed globally)"
 	@echo "  clean     - Remove temporary Python files"
 	@echo "  dev       - Create virtual env and install runtime and development dependencies from lockfile"
 	@echo "  coverage  - Open a browser to view coverage HTML report"
@@ -25,16 +25,16 @@ help:
 	@echo "  typecheck - Run type checks with mypy"
 
 install:
-	rm uv.lock
-	uv venv
+	rm -f uv.lock
+	uv venv --clean
 	uv sync 
 
 audit: 
 	pip-audit
 
 dev:
-	rm uv.lock
-	uv venv
+	rm -f uv.lock
+	uv venv --clean
 	uv lock 
 	uv sync --extra dev 
 
