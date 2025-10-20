@@ -51,6 +51,8 @@ def remove_windows_dev_files():
     # The hook's working directory is the root of the generated project.
     project_root = Path.cwd() 
     
+    print(f"\n--- Post Generation Hook: Removing unnecessary Windows development files ---")
+
     if WINDOWS_DEVELOPMENT.lower() == 'no':
         print(f"Removing unneeded Windows development files...")
 
@@ -69,6 +71,8 @@ def remove_windows_dev_files():
                 print(f"  - Warning: Path not found (already removed or not generated): {path_str}")
     else:
         print(f"Keeping Windows development files.")
+
+    print(f"----------------------------------------------------------\n")
 
 
 if __name__ == '__main__':
