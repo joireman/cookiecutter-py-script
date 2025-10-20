@@ -1,17 +1,33 @@
 # tasks.py - Requires 'invoke' to be installed
 from invoke import task
 
-@task(help={'clean': "removes virtual environment before starting."})
+@task(help={'clean': "removes virtual environment"})
 def install(ctx, clean=False):
     """Create virtual env and install dependencies from lockfile."""
     if clean:
         ctx.run("rm -rf .venv")
 
     # uv is called globally
-    ctx.run("uv venv")
-    ctx.run("uv pip install -e \".[dev]\"")
-    ctx.run("uv pip compile --output-file uv.lock --extra dev --extra analysis pyproject.toml")
-    ctx.run("uv pip sync uv.lock")
+    ctx.run("rm -f uv.lock")
+    ctx.run("uv venv --clean")
+    ctx.run("uv sync")
+
+audit: 
+	pip-audit
+
+@task
+def dev(ctx):
+
+    # uv is called globally
+    ctx.run("rm -f uv.lock")
+    ctx.run("uv venv --clean")
+    ctx.run("uv lock")
+    ctx.run("uv --extra dev")
+dev:
+	rm -f uv.lock
+	uv venv --clean
+	uv lock 
+	uv sync --extra dev 
 
 @task
 def test(ctx):
@@ -24,7 +40,7 @@ def lint(ctx):
     ctx.run(".venv/Scripts/python.exe -m ruff check .")
 
 @task 
-def docs(ctx):
+def coverage(ctx):
     ctx.run("open htmlcov/index.html.")
 
 @task 

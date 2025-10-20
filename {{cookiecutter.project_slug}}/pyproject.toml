@@ -12,14 +12,14 @@ license = { text = "MIT" }
 
 [project.optional-dependencies]
 dev = [
-    "pytest==8.4.2",
-    "pytest-cov==7.0.0",
-    "ruff==0.13.1",
-    "bandit==1.8.6",
-    "mypy==1.11.1",
+    "pytest>=8.4.2",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.13.1",
+    "bandit>=1.8.6",
+    "mypy>=1.11.1",
     {% if cookiecutter.include_mkdocs_docs.lower() == 'yes' %}
-    "mkdocs==1.6.0",
-    "mkdocs-material==9.6.20",
+    "mkdocs>=1.6.0",
+    "mkdocs-material>=9.6.20",
     {% endif %}
     {% if cookiecutter.developing_on_windows.lower() == 'yes' %}
     "invoke>=2.2.0",
