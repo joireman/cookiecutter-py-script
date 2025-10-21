@@ -12,22 +12,13 @@ def install(ctx, clean=False):
     ctx.run("uv venv --clean")
     ctx.run("uv sync")
 
-audit: 
-	pip-audit
-
 @task
 def dev(ctx):
-
     # uv is called globally
     ctx.run("rm -f uv.lock")
     ctx.run("uv venv --clean")
     ctx.run("uv lock")
     ctx.run("uv --extra dev")
-dev:
-	rm -f uv.lock
-	uv venv --clean
-	uv lock 
-	uv sync --extra dev 
 
 @task
 def test(ctx):
@@ -38,10 +29,6 @@ def test(ctx):
 @task 
 def lint(ctx):
     ctx.run(".venv/Scripts/python.exe -m ruff check .")
-
-@task 
-def coverage(ctx):
-    ctx.run("open htmlcov/index.html.")
 
 @task 
 def coverage(ctx):
