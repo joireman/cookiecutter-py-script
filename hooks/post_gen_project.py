@@ -14,8 +14,8 @@ MKDOCS_PATHS_TO_REMOVE = [
 ]
 
 WINDOWS_DEVELOPMENT_PATHS_TO_REMOVE = [
-    'tasks.py',
-]
+    'tasks.py', 'setup.bat'
+] 
 
 def remove_mkdocs_files():
     """Removes MkDocs documentation structure if the user opted out."""
@@ -73,7 +73,6 @@ def remove_windows_dev_files():
         print(f"Keeping Windows development files.")
 
     print(f"----------------------------------------------------------\n")
-
 
 if __name__ == '__main__':
     # Use 'yes' and 'no' as strings, and lower() to handle case variations

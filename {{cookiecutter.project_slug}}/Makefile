@@ -26,7 +26,7 @@ help:
 
 install:
 	rm -f uv.lock
-	uv venv --clean
+	uv venv --clear
 	uv sync 
 
 audit: 
@@ -34,9 +34,10 @@ audit:
 
 dev:
 	rm -f uv.lock
-	uv venv --clean
+	uv venv --clear
 	uv lock 
 	uv sync --extra dev 
+	uv pip install -e . --no-deps
 
 format:
 	$(PYTHON_BIN) -m ruff format .
