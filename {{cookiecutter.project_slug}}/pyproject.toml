@@ -26,6 +26,10 @@ dev = [
     {% endif %}
 ]
 
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [tool.uv]
 # Configuration for uv, if needed
 # For now, we'll keep it simple
@@ -35,7 +39,7 @@ line-length = 100
 target-version = "py{{ cookiecutter.python_version.replace('.','') }}"
 
 [tool.ruff.lint]
-select = ["E", "F", "B", "I"] # Common rules for errors, flakes, bugs, and imports
+select = ["E", "F", "B", "I", "UP"] # Common rules for errors, flakes, bugs, and imports
 # Linter rules to ignore, e.g., if you want to skip docstring checks
 ignore = ["D100", "D101", "D102", "D103", "D104", "D105", "D107"]
 
